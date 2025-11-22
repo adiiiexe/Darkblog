@@ -50,20 +50,26 @@ function AppContent() {
   return (
     <AuthContext.Provider value={{ user, setUser, checkAuth }}>
       <div className="App">
-        <BrowserRouter>
-          <Routes>
-            <Route path="/" element={user ? <Navigate to="/feed" /> : <Landing />} />
-            <Route path="/feed" element={user ? <Dashboard /> : <Navigate to="/" />} />
-            <Route path="/editor" element={user ? <BlogEditor /> : <Navigate to="/" />} />
-            <Route path="/editor/:blogId" element={user ? <BlogEditor /> : <Navigate to="/" />} />
-            <Route path="/blog/:blogId" element={<BlogView />} />
-            <Route path="/profile/:username" element={<ProfileView />} />
-            <Route path="/settings" element={user ? <Settings /> : <Navigate to="/" />} />
-          </Routes>
-        </BrowserRouter>
+        <Routes>
+          <Route path="/" element={user ? <Navigate to="/feed" /> : <Landing />} />
+          <Route path="/feed" element={user ? <Dashboard /> : <Navigate to="/" />} />
+          <Route path="/editor" element={user ? <BlogEditor /> : <Navigate to="/" />} />
+          <Route path="/editor/:blogId" element={user ? <BlogEditor /> : <Navigate to="/" />} />
+          <Route path="/blog/:blogId" element={<BlogView />} />
+          <Route path="/profile/:username" element={<ProfileView />} />
+          <Route path="/settings" element={user ? <Settings /> : <Navigate to="/" />} />
+        </Routes>
         <Toaster position="top-right" />
       </div>
     </AuthContext.Provider>
+  );
+}
+
+function App() {
+  return (
+    <BrowserRouter>
+      <AppContent />
+    </BrowserRouter>
   );
 }
 
