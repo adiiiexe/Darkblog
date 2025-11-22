@@ -107,6 +107,11 @@ async def get_current_user(session_token: Optional[str] = Cookie(None), authoriz
     
     return User(**user)
 
+# Root route
+@api_router.get("/")
+async def root():
+    return {"message": "NightBlog API"}
+
 # Auth Routes
 @api_router.post("/auth/session")
 async def create_session(session_id: str = Form(...)):
