@@ -3,6 +3,7 @@ import "@/App.css";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import axios from "axios";
 import { Toaster } from "@/components/ui/sonner";
+import { useAuthHandler } from "./hooks/useAuth";
 import Landing from "./pages/Landing";
 import Dashboard from "./pages/Dashboard";
 import BlogEditor from "./pages/BlogEditor";
@@ -17,9 +18,11 @@ axios.defaults.withCredentials = true;
 
 export const AuthContext = React.createContext(null);
 
-function App() {
+function AppContent() {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
+
+  useAuthHandler(setUser, setLoading);
 
   useEffect(() => {
     checkAuth();
